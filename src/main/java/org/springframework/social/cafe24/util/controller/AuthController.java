@@ -8,7 +8,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.social.cafe24.api.Cafe24;
 import org.springframework.social.cafe24.connect.Cafe24OAuth2Connection;
 import org.springframework.social.cafe24.util.UserCookieSignInAdapter;
-import org.springframework.social.cafe24.util.connect.ConnectService;
+import org.springframework.social.cafe24.util.service.ConnectService;
 import org.springframework.social.connect.*;
 import org.springframework.social.connect.support.OAuth2ConnectionFactory;
 import org.springframework.social.connect.web.*;
@@ -100,7 +100,7 @@ public class AuthController extends ConnectController {
 
     @RequestMapping(value = "/{providerId}", method = RequestMethod.GET, params = {"mall_id", "hmac"})
     public RedirectView connect(@PathVariable String providerId, @RequestParam HashMap<String , String > params, NativeWebRequest request) {
-        logger.debug("connect handler called...");
+        logger.debug("service handler called...");
 
         if (params.size() > 0) {
             Set<String> keys = params.keySet();
@@ -116,16 +116,16 @@ public class AuthController extends ConnectController {
             /* 다른 매개변수들 통해 hmac 값 구하기 */
             Assert.notNull(params, "app 접근시 전달되는 쿼리 스트링이 null이면 안 된다.");
             String clientSecret = environment.getProperty("cafe24.app.secret");
-            logger.debug("connect clientSecret: " + clientSecret);
+            logger.debug("service clientSecret: " + clientSecret);
             String hmacDecodedFromQueryString = getHmac(params, clientSecret);
-            logger.debug("connect hmacValue: " + hmacDecodedFromQueryString);
+            logger.debug("service hmacValue: " + hmacDecodedFromQueryString);
 
-            logger.debug("connect originHmac: " + originHmac);
+            logger.debug("service originHmac: " + originHmac);
             if (hmacDecodedFromQueryString.equals(originHmac)) {
                 logger.debug("hmac 검사 통과");
 
                 mallId = params.get("mall_id");
-                logger.debug("connect after hmac test mallId: " + mallId);
+                logger.debug("service after hmac test mallId: " + mallId);
                 /* 원래는 SocialContext에서 @Bean으로 전달되던 ConnectionRepository를 mallId별로 만들기 위해 */
                 /* hmac 검사 통과 이후 생성하도록 코드 수정 */
                 connectionRepository = connectService.makeConnectionRepository(mallId);
