@@ -9,7 +9,6 @@ import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.social.oauth2.OAuth2Template;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -25,6 +24,8 @@ public class Cafe24OAuth2Template extends OAuth2Template {
     private final String scope;
     private final String clientId;
     private final String clientSecret;
+    private String authorizationHeader;
+
 
     private static String mallId;
 
@@ -37,6 +38,7 @@ public class Cafe24OAuth2Template extends OAuth2Template {
         this.scope = scope;
         this.clientId = appId;
         this.clientSecret = appSecret;
+        this.authorizationHeader = "Basic " + new String(Base64.getEncoder().encode((clientId + ":" + clientSecret).getBytes()));
     }
 
     protected static String getAuthorizeUrl() {
@@ -53,26 +55,7 @@ public class Cafe24OAuth2Template extends OAuth2Template {
 
 
 
-    @Override
-    protected AccessGrant createAccessGrant(String accessToken,
-                                            String scope,
-                                            String refreshToken,
-                                            Long expiresIn,
-                                            Map<String, Object> response) {
-        logger.info("createAccessGrant accessToken: " + accessToken);
-        logger.info("createAccessGrant scope: " + scope);
-        logger.info("createAccessGrant refreshToken: " + refreshToken);
-        logger.info("createAccessGrant expiresIn: " + expiresIn);
-        Set<String> keys = response.keySet();
-        for (String key : keys) {
-            logger.info("createAccessGrant response.get(" + key + "): " + response.get(key));
-        }
 
-        AccessGrant createdAccessGrant = super.createAccessGrant(accessToken, scope, refreshToken, expiresIn, response);
-        logger.info("createAccessGrant createdAccessGrant.getAccessToken(): " + createdAccessGrant.getAccessToken());
-
-        return createdAccessGrant;
-    }
 
     /* code를 얻기 위한 Url을 생성하는 메서드(그랜트 타입을 주지 않는 경우) */
     @Override
@@ -85,6 +68,22 @@ public class Cafe24OAuth2Template extends OAuth2Template {
     @Override
     public String buildAuthorizeUrl(GrantType grantType, OAuth2Parameters parameters) {
         logger.info("buildAuthorizeUrl2 started ");
+        logger.debug("parameters.get(is_multi_shop): " + parameters.get("is_multi_shop"));
+        logger.debug("parameters.get(lang): " + parameters.get("lang"));
+        logger.debug("parameters.get(shop_no): " + parameters.get("shop_no"));
+        logger.debug("parameters.get(timestamp): " + parameters.get("timestamp"));
+        logger.debug("parameters.get(user_id): " + parameters.get("user_id"));
+        logger.debug("parameters.get(user_name): " + parameters.get("user_name"));
+        logger.debug("parameters.get(user_type): " + parameters.get("user_type"));
+        logger.debug("parameters.get(hmac): " + parameters.get("hmac"));
+        parameters.remove("is_multi_shop");
+        parameters.remove("lang");
+        parameters.remove("shop_no");
+        parameters.remove("timestamp");
+        parameters.remove("user_id");
+        parameters.remove("user_name");
+        parameters.remove("user_type");
+        parameters.remove("hmac");
 
         Set<String> keys = parameters.keySet();
         for (String key : keys) {
@@ -106,71 +105,83 @@ public class Cafe24OAuth2Template extends OAuth2Template {
         return authorizeUrl;
     }
 
+
     @Override
     public AccessGrant exchangeForAccess(String authorizationCode,
                                          String redirectUri,
                                          MultiValueMap<String, String> additionalParameters) {
-        logger.info("exchangeForAccess 1");
         logger.info("exchangeForAccess authorizationCode: " + authorizationCode);
         logger.info("exchangeForAccess redirectUri: " + redirectUri);
 
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-        String clientInfo = clientId + ":" + clientSecret;
-        logger.info("clientId: " + clientId);
-        logger.info("clientSecret: " + clientSecret);
-        logger.info("clientInfo: " + clientInfo);
-        /*params.set("client_id", clientId);
-        params.set("client_secret", clientSecret);*/
-        byte[] base64EncodedClientInfo = Base64.getEncoder().encode(clientInfo.getBytes());
 
-        String base64EncodedStr = new String(base64EncodedClientInfo);
-        logger.info("base64EncodedClientInfo base64EncodedStr: " + base64EncodedStr);
+        logger.info("base64EncodedClientInfo base64EncodedStr: " + authorizationHeader);
 
         params.set("code", authorizationCode);
         params.set("redirect_uri", redirectUri);
         params.set("grant_type", "authorization_code");
-        logger.info("exchangeForAccess 2");
 
         if (additionalParameters != null) {
-            logger.info("exchangeForAccess 3");
-
+            logger.info("exchangeForAccess additionalParameters == null");
             params.putAll(additionalParameters);
         }
-        logger.info("exchangeForAccess 4");
 
-        /* 헤더, Access Token 발급 받기 위한 url, restTemplate 준ㅂ;*/
-        HttpHeaders headers = new HttpHeaders();
-        String accessTokenUrl = getAccessTokenUrl();
-        RestTemplate restTemplate = getRestTemplate();
-
-        /* 실제 헤더 값 넣기 */
-        headers.set("Authorization", "Basic " + base64EncodedStr);
-        // headersForAccessToken.add("Content-Type", "application/x-www-form-urlencoded");
-        /* 헤더에 Content-Type 설정 */
-        headers.setContentType(new MediaType("application", "x-www-form-urlencoded"));
-//        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-
-//        restTemplate.setDefaultUriVariables(params);
-
-        //MultiValueMap<String, String>는 파라미터의 타입
-        HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
-//        restTemplate.exchange(accessTokenUrl, HttpMethod.POST, entity, String.class);
-
-
-        /* 실제로 AcccessTokenUrl로 직접 요청하고 응답을 받는 부분 */
-        ResponseEntity<Map> responseEntity = restTemplate.exchange(accessTokenUrl, HttpMethod.POST, entity, Map.class);
-
-   /*     logger.info("exchangeForAccess accessGrant map.get(access_token): "  + map.get("access_token"));
-        logger.info("exchangeForAccess accessGrant map.get(refresh_token): "  + map.get("refresh_token"));*/
-        logger.info("exchangeForAccess accessGrant map.get(refresh_token): " + responseEntity.getBody().get("access_token"));
-        AccessGrant accessGrant = createAccessGrantForExchange(responseEntity.getBody());
+        AccessGrant accessGrant = postForAccessGrant(params);
 
         logger.info("exchangeForAccess accessGrant getAccessToken: "  + accessGrant.getAccessToken());
+        logger.info("exchangeForAccess accessGrant getRefreshToken: "  + accessGrant.getRefreshToken());
+        logger.info("exchangeForAccess accessGrant getExpireTime: "  + accessGrant.getExpireTime());
+        logger.info("exchangeForAccess accessGrant getScope: "  + accessGrant.getScope());
+
+
         return accessGrant;
     }
 
-    private AccessGrant createAccessGrantForExchange(Map<String, Object> result) {
+
+    @Override
+    public AccessGrant refreshAccess(String refreshToken, MultiValueMap<String, String> additionalParameters) {
+        String mallIdToRefresh = additionalParameters.get("mallId").get(0);
+
+        logger.debug("refreshAccess mallIdToRefresh: " + mallIdToRefresh);
+        setMallId(mallIdToRefresh);
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+        params.set("refresh_token", refreshToken);
+        params.set("grant_type", "refresh_token");
+
+        AccessGrant accessGrant = postForAccessGrant(params);
+
+        logger.info("refreshAccess accessGrant getAccessToken: "  + accessGrant.getAccessToken());
+        logger.info("refreshAccess accessGrant getRefreshToken: "  + accessGrant.getRefreshToken());
+        logger.info("refreshAccess accessGrant getExpireTime: "  + accessGrant.getExpireTime());
+        logger.info("refreshAccess accessGrant getScope: "  + accessGrant.getScope());
+        return accessGrant;
+    }
+
+    private AccessGrant postForAccessGrant(MultiValueMap<String, String> params) {
+        /* 헤더, Access Token 발급 받기 위한 url, restTemplate 준비*/
+        HttpHeaders headers = new HttpHeaders();
+
+        /* 실제 헤더 값 넣기 */
+        headers.set("Authorization", authorizationHeader);
+        logger.debug("postForAccessGrant authorizationHeader: " + authorizationHeader);
+
+        /* 헤더에 Content-Type 설정 */
+
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);  // == headers.setContentType(new MediaType("application", "x-www-form-urlencoded"));
+        HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
+
+        /* 실제로 AcccessTokenUrl로 직접 요청하고 응답을 받는 부분 */
+        ResponseEntity<Map> responseEntity = getRestTemplate().exchange(getAccessTokenUrl(), HttpMethod.POST, entity, Map.class);
+        Map<String, Object> result = responseEntity.getBody();
+
+        /* 결과 확인 로그 */
+        for (String key : result.keySet()) {
+            logger.debug("postForAccessGrant result.get(" + key + "): " + result.get(key));
+        }
+        return createAccessGrant(result);
+    }
+
+    private AccessGrant createAccessGrant(Map result) {
         String accessToken = (String) result.get("access_token");
         String refreshToken = (String) result.get("refresh_token");
         String  strIssuedAt = (String) result.get("issued_at");
@@ -178,16 +189,19 @@ public class Cafe24OAuth2Template extends OAuth2Template {
         String  strExpiresAt = (String) result.get("expires_at");
         Long expiresAt = stringToDate(strExpiresAt);
 
-        logger.info("createAccessGrantForExchange issuedAt: " + issuedAt);
-        logger.info("createAccessGrantForExchange expiresAt: " + expiresAt);
+        logger.info("createAccessGrant issuedAt: " + issuedAt);
+        logger.info("createAccessGrant expiresAt: " + expiresAt);
         Long expiresIn = null;
         if (issuedAt != null && expiresAt != null) {
             expiresIn = expiresAt - issuedAt;
-        }
+            logger.info("createAccessGrant expiresIn: " + expiresIn);
+            expiresIn /= 1000l;
 
-        logger.info("createAccessGrantForExchange accessToken: " + accessToken);
-        logger.info("createAccessGrantForExchange refreshToken: " + refreshToken);
-        logger.info("createAccessGrantForExchange expiresIn: " + expiresIn);
+        }
+        logger.info("createAccessGrant expiresIn/1000l: " + expiresIn);
+
+        logger.info("createAccessGrant accessToken: " + accessToken);
+        logger.info("createAccessGrant refreshToken: " + refreshToken);
 
         return new AccessGrant(accessToken, scope, refreshToken, expiresIn);
     }
@@ -248,8 +262,7 @@ public class Cafe24OAuth2Template extends OAuth2Template {
         return mallId;
     }
 
-
-
-
-
+    public static void setMallId(String mallId) {
+        Cafe24OAuth2Template.mallId = mallId;
+    }
 }

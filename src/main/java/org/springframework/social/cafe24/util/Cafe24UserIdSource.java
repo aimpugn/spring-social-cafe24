@@ -1,9 +1,9 @@
-package org.springframework.social.cafe24.config.util;
+package org.springframework.social.cafe24.util;
 
-import com.cafe24.devbit004.pop.social.connect.Cafe24OAuth2Template;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.social.UserIdSource;
+import org.springframework.social.cafe24.connect.Cafe24OAuth2Template;
 
 public class Cafe24UserIdSource implements UserIdSource {
 

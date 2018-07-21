@@ -1,10 +1,10 @@
 package org.springframework.social.cafe24.config.support;
 
-import com.cafe24.devbit004.pop.social.api.Cafe24;
-import com.cafe24.devbit004.pop.social.connect.Cafe24OAuth2Template;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.social.UserIdSource;
+import org.springframework.social.cafe24.api.Cafe24;
+import org.springframework.social.cafe24.connect.Cafe24OAuth2Template;
 import org.springframework.social.config.xml.ApiHelper;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.UsersConnectionRepository;

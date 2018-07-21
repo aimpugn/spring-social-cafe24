@@ -1,8 +1,8 @@
-package org.springframework.social.cafe24.config.util;
+package org.springframework.social.cafe24.util;
 
-import com.cafe24.devbit004.pop.social.api.impl.Cafe24Template;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.social.cafe24.api.impl.Cafe24Template;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
 

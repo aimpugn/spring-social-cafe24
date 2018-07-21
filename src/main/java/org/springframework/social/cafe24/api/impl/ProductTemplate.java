@@ -1,11 +1,11 @@
 package org.springframework.social.cafe24.api.impl;
 
-import com.cafe24.devbit004.pop.social.api.Cafe24;
-import com.cafe24.devbit004.pop.social.api.Product;
-import com.cafe24.devbit004.pop.social.api.ProductOperations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
+import org.springframework.social.cafe24.api.Cafe24;
+import org.springframework.social.cafe24.api.Product;
+import org.springframework.social.cafe24.api.ProductOperations;
 
 import java.util.HashMap;
 import java.util.List;
