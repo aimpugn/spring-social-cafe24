@@ -1,0 +1,88 @@
+{
+    "variants": [
+        {
+            "shop_no": 1,
+            "variant_code": "P00000CC000A",
+            "option": [
+                {
+                    "name": "남녀 공용 상의 색상",
+                    "value": "black"
+                }
+            ],
+            "custom_variant_code": "",
+            "display": "T",
+            "selling": "T",
+            "additional_amount": "0.00"
+        },
+        {
+            "shop_no": 1,
+            "variant_code": "P00000CC000B",
+            "option": [
+                {
+                    "name": "남녀 공용 상의 색상",
+                    "value": "red"
+                }
+            ],
+            "custom_variant_code": "",
+            "display": "T",
+            "selling": "T",
+            "additional_amount": "0.00"
+        },
+        {
+            "shop_no": 1,
+            "variant_code": "P00000CC000C",
+            "option": [
+                {
+                    "name": "남녀 공용 상의 색상",
+                    "value": "gray"
+                }
+            ],
+            "custom_variant_code": "",
+            "display": "T",
+            "selling": "T",
+            "additional_amount": "0.00"
+        },
+        {
+            "shop_no": 1,
+            "variant_code": "P00000CC000D",
+            "option": [
+                {
+                    "name": "남녀 공용 상의 색상",
+                    "value": "green"
+                }
+            ],
+            "custom_variant_code": "",
+            "display": "T",
+            "selling": "T",
+            "additional_amount": "0.00"
+        },
+        {
+            "shop_no": 1,
+            "variant_code": "P00000CC000E",
+            "option": [
+                {
+                    "name": "남녀 공용 상의 색상",
+                    "value": "blue"
+                }
+            ],
+            "custom_variant_code": "",
+            "display": "T",
+            "selling": "T",
+            "additional_amount": "0.00"
+        },
+        {
+            "shop_no": 1,
+            "variant_code": "P00000CC000F",
+            "option": [
+                {
+                    "name": "남녀 공용 상의 색상",
+                    "value": "brown"
+                }
+            ],
+            "custom_variant_code": "",
+            "display": "T",
+            "selling": "T",
+            "additional_amount": "0.00"
+        }
+    ]
+}

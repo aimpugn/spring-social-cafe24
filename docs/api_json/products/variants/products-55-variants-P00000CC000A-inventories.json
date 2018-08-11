@@ -1,0 +1,11 @@
+{
+    "inventory": {
+        "shop_no": 1,
+        "variant_code": "P00000CC000A",
+        "use_inventory": "F",
+        "important_inventory": "A",
+        "inventory_control_type": "A",
+        "display_soldout": "F",
+        "quantity": 0
+    }
+}

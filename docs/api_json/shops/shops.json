@@ -1,0 +1,55 @@
+{
+  "shops": [
+    {
+      "shop_no": 1,
+      "default": "T",
+      "shop_name": "한국어 쇼핑몰",
+      "language_code": "ko_KR",
+      "language_name": "한국어",
+      "currency_code": "KRW",
+      "currency_name": "￦ 원 (한국)",
+      "reference_currency_code": "",
+      "reference_currency_name": null,
+      "pc_skin_no": 9,
+      "mobile_skin_no": 2,
+      "base_domain": "utkg3000.cafe24.com",
+      "primary_domain": "utkg3000.cafe24.com",
+      "slave_domain": [],
+      "active": "T"
+    },
+    {
+      "shop_no": 2,
+      "default": "F",
+      "shop_name": "일본몰",
+      "language_code": "ja_JP",
+      "language_name": "일본어",
+      "currency_code": "JPY",
+      "currency_name": "&yen; 엔 (일본)",
+      "reference_currency_code": "KRW",
+      "reference_currency_name": "￦ 원 (한국)",
+      "pc_skin_no": 3,
+      "mobile_skin_no": 4,
+      "base_domain": "shop2.utkg3000.cafe24.com",
+      "primary_domain": "shop2.utkg3000.cafe24.com",
+      "slave_domain": [],
+      "active": "T"
+    },
+    {
+      "shop_no": 3,
+      "default": "F",
+      "shop_name": "사나몰",
+      "language_code": "ko_KR",
+      "language_name": "한국어",
+      "currency_code": "KRW",
+      "currency_name": "￦ 원 (한국)",
+      "reference_currency_code": "",
+      "reference_currency_name": null,
+      "pc_skin_no": 5,
+      "mobile_skin_no": 6,
+      "base_domain": "shop3.utkg3000.cafe24.com",
+      "primary_domain": "shop3.utkg3000.cafe24.com",
+      "slave_domain": [],
+      "active": "T"
+    }
+  ]
+}

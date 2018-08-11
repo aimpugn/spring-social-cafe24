@@ -1,0 +1,19 @@
+{
+  "shop": {
+    "shop_no": 1,
+    "default": "T",
+    "shop_name": "한국어 쇼핑몰",
+    "language_code": "ko_KR",
+    "language_name": "한국어",
+    "currency_code": "KRW",
+    "currency_name": "￦ 원 (한국)",
+    "reference_currency_code": "",
+    "reference_currency_name": null,
+    "pc_skin_no": 9,
+    "mobile_skin_no": 2,
+    "base_domain": "utkg3000.cafe24.com",
+    "primary_domain": "utkg3000.cafe24.com",
+    "slave_domain": [],
+    "active": "T"
+  }
+}

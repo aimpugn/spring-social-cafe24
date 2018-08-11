@@ -1,3 +1,4 @@
+-- 이 소스 코드에서는 userId, providerUserId 모두 mallId로 저장된다.
 create table UserConnection (
  userId varchar(255) not null,
  providerId varchar(255) not null,

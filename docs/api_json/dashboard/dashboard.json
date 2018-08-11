@@ -1,0 +1,135 @@
+{
+  "dashboard": {
+    "shop_no": 1,
+    "daily_sales_stats": [
+      {
+        "title": "07월 20일",
+        "date": "2018-07-20",
+        "order_price": "0.00",
+        "payed_price": "0.00",
+        "refund_price": "0.00",
+        "order_count": 0,
+        "payed_count": 0,
+        "refund_count": 0,
+        "preparing_products_count": 0,
+        "preparing_shipment_count": 0,
+        "waiting_shipment_count": 0,
+        "delivering_count": 0,
+        "shipped_count": 0,
+        "canceled_count": 0,
+        "returned_count": 0,
+        "exchanged_count": 0,
+        "waiting_payment_count": 0,
+        "ordered_total_count": 0
+      },
+      {
+        "title": "07월 21일 (금일)",
+        "date": "2018-07-21",
+        "order_price": "0.00",
+        "payed_price": "0.00",
+        "refund_price": "0.00",
+        "order_count": 0,
+        "payed_count": 0,
+        "refund_count": 0,
+        "preparing_products_count": 0,
+        "preparing_shipment_count": 0,
+        "waiting_shipment_count": 0,
+        "delivering_count": 0,
+        "shipped_count": 0,
+        "canceled_count": 0,
+        "returned_count": 0,
+        "exchanged_count": 0,
+        "waiting_payment_count": 0,
+        "ordered_total_count": 0
+      }
+    ],
+    "weekly_sales_stats": {
+      "ordered_total_price": "0.00",
+      "payed_total_price": "0.00",
+      "refunded_total_price": "0.00",
+      "ordered_count": 0,
+      "payed_count": 0,
+      "refunded_count": 0,
+      "ordered_average_total_price": "0.00",
+      "payed_average_total_price": "0.00",
+      "refunded_average_total_price": "0.00",
+      "ordered_average_count": 0,
+      "payed_average_count": 0,
+      "refunded_average_count": 0
+    },
+    "monthly_sales_stats": {
+      "ordered_total_price": "708000.00",
+      "payed_total_price": "331000.00",
+      "refunded_total_price": "0.00",
+      "ordered_count": 3,
+      "payed_count": 1,
+      "refunded_count": 0,
+      "ordered_average_total_price": "23600.00",
+      "payed_average_total_price": "11033.00",
+      "refunded_average_total_price": "0.00",
+      "ordered_average_count": 0,
+      "payed_average_count": 0,
+      "refunded_average_count": 0
+    },
+    "sold_out_products_count": 0,
+    "new_members_count": 0,
+    "board_list": [
+      {
+        "type": "B",
+        "board_no": 1,
+        "board_name": "공지사항",
+        "new_registered_count": 0,
+        "page_url": "/disp/admin/mobile/index#/bulletins?board_no=1"
+      },
+      {
+        "type": "B",
+        "board_no": 2,
+        "board_name": "뉴스/이벤트",
+        "new_registered_count": 0,
+        "page_url": "/disp/admin/mobile/index#/bulletins?board_no=2"
+      },
+      {
+        "type": "B",
+        "board_no": 3,
+        "board_name": "이용안내 FAQ",
+        "new_registered_count": 0,
+        "page_url": "/disp/admin/mobile/index#/bulletins?board_no=3"
+      },
+      {
+        "type": "B",
+        "board_no": 4,
+        "board_name": "상품 사용후기",
+        "new_registered_count": 0,
+        "page_url": "/disp/admin/mobile/index#/bulletins?board_no=4"
+      },
+      {
+        "type": "B",
+        "board_no": 5,
+        "board_name": "자유게시판",
+        "new_registered_count": 0,
+        "page_url": "/disp/admin/mobile/index#/bulletins?board_no=5"
+      },
+      {
+        "type": "B",
+        "board_no": 6,
+        "board_name": "상품 Q&A",
+        "new_registered_count": 0,
+        "page_url": "/disp/admin/mobile/index#/bulletins?board_no=6"
+      },
+      {
+        "type": "B",
+        "board_no": 7,
+        "board_name": "자료실",
+        "new_registered_count": 0,
+        "page_url": "/disp/admin/mobile/index#/bulletins?board_no=7"
+      },
+      {
+        "type": "B",
+        "board_no": 8,
+        "board_name": "갤러리",
+        "new_registered_count": 0,
+        "page_url": "/disp/admin/mobile/index#/bulletins?board_no=8"
+      }
+    ]
+  }
+}

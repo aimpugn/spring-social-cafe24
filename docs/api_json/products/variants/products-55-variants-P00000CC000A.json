@@ -1,0 +1,16 @@
+{
+    "variant": {
+        "shop_no": 1,
+        "variant_code": "P00000CC000A",
+        "option": [
+            {
+                "name": "남녀 공용 상의 색상",
+                "value": "black"
+            }
+        ],
+        "custom_variant_code": "",
+        "display": "T",
+        "selling": "T",
+        "additional_amount": "0.00"
+    }
+}
