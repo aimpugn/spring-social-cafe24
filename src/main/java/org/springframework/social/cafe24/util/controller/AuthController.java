@@ -272,18 +272,6 @@ public class AuthController extends ConnectController {
     }
 
 
-    private void addConnection(Connection<?> connection, ConnectionFactory<?> connectionFactory, WebRequest request) {
-        logger.debug("addConnection started...");
-        try {
-            // 연결 후의 작업이 필요한 경우 사용
-            postConnect(connectionFactory, connection, request);
-        } catch (DuplicateConnectionException e) {
-            logger.debug("addConnection DuplicateConnectionException");
-
-            sessionStrategy.setAttribute(request, DUPLICATE_CONNECTION_ATTRIBUTE, e);
-        }
-    }
-
     /**
      * oauth2Callback으로 인증 받은 후 connection에 해당하는 사용자가 존재하는지 확인. <p>
      * userId는 하나만 존재하므로 한 개일 때만 /admin/popup으로 이동시킨다
@@ -316,7 +304,7 @@ public class AuthController extends ConnectController {
             /* 해당하는 아이디가 있다면 업데이트 */
             usersConnectionRepository.createConnectionRepository(userIds.get(0)).updateConnection(connection);
 
-            /*  */
+            /* 쿠키 등록 및 성공시 리다이렉트할 url 반환 */
             String urlWhenSuccess = userCookieSignInAdapter.signIn(userIds.get(0), connection, request);
             logger.debug("handleSignIn (userIds.size() == 1) urlWhenSuccess: " + urlWhenSuccess);
 

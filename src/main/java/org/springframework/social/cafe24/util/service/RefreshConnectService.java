@@ -28,6 +28,7 @@ public class RefreshConnectService {
 
     // fixedRate: 이전 실행부터 다음 실행 전 N 밀리세컨드를 기다린다. 만약 현재 실행이 fixedRate를 초과하면, 다음 실행 하나만 대기(queue) 상태가 된다.
     // fixedDelay: 이전 실행부터 다음 실행 전 N 밀리세컨드를 기다린다. 현재 실행이 얼만큼의 시간이 걸리든, (현재 실행의 끝 시간 + fixedDelay) 후에 다음 실행이 시작된다. 대기
+    // TODO 갱신할 때마다 DB에서 모든 정보를 가져오는 경우도 고려해볼 것
     @Scheduled(fixedDelay = 3600000)
     public void doRefresh() {
         String now = dateFormat.format(new Date());

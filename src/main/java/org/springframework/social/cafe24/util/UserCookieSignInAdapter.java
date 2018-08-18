@@ -24,6 +24,6 @@ public class UserCookieSignInAdapter implements SignInAdapter {
         userCookieGenerator.addCookie(userId, request.getNativeResponse(HttpServletResponse.class));
         logger.debug("singIn return null...");
 
-        return null;
+        return "/admin/popup";
     }
 }
